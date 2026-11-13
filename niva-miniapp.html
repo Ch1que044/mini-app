@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>НИВА — оптовые поставки рыбы и икры</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:#0b0c0e;--sf:#14161a;--sf2:#1b1e23;--ln:rgba(201,169,110,.2);--gold:#c9a96e;--tx:#ece7dd;--mu:#8d877a;--ez:cubic-bezier(.22,1,.36,1);--sr:"Cormorant Garamond","Playfair Display",Georgia,"Times New Roman",serif;--nav:64px;--sb:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:-apple-system,"SF Pro Text",Roboto,"Helvetica Neue",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none;overflow-x:hidden}
+button{font-family:inherit;color:inherit}
+.lbl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.view{display:none;padding-bottom:calc(var(--nav) + var(--sb) + 96px)}.view.on{display:block;animation:vin .45s var(--ez)}
+@keyframes vin{from{opacity:0;transform:translateY(14px)}}
+.hd{padding:calc(env(safe-area-inset-top,0px) + 18px) 18px 14px;display:flex;justify-content:space-between;align-items:center}
+.wm{font-family:var(--sr);font-size:26px;letter-spacing:.34em;font-weight:600;margin:0}
+.qa{display:flex;gap:10px;padding:0 18px 14px}
+.bt{height:48px;border:1px solid var(--gold);background:var(--gold);color:#0b0c0e;font-size:11.5px;letter-spacing:.1em;white-space:nowrap;text-transform:uppercase;font-weight:700;padding:0 18px;flex:1;transition:.3s var(--ez)}
+.bt:active{transform:scale(.97);opacity:.85}.bt.o{background:transparent;color:var(--gold)}.qa .bt:first-child{flex:1.35}
+.stk{position:sticky;top:0;z-index:8;background:var(--bg);padding:6px 0 0;border-bottom:1px solid var(--ln)}
+.sr{margin:0 18px;position:relative}.sr input{width:100%;height:46px;background:var(--sf);border:1px solid var(--ln);color:var(--tx);font-size:16px;padding:0 14px 0 42px;outline:0;border-radius:0;transition:border-color .3s}.sr input:focus{border-color:var(--gold)}
+.sr svg{position:absolute;left:14px;top:14px;width:18px;height:18px;stroke:var(--mu);fill:none;stroke-width:1.6}
+.ch{display:flex;gap:8px;overflow-x:auto;padding:12px 18px;scrollbar-width:none;}.ch::-webkit-scrollbar{display:none}
+.cp{flex:none;height:36px;padding:0 16px;border:1px solid var(--ln);background:transparent;color:var(--mu);font-size:13px;letter-spacing:.04em;transition:.3s var(--ez)}
+.cp.on{background:var(--gold);border-color:var(--gold);color:#0b0c0e;font-weight:600}
+.ls{padding:6px 18px}
+.rw{display:grid;grid-template-columns:88px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--ln);animation:vin .5s var(--ez) both}
+.th{width:88px;height:88px;position:relative;overflow:hidden;background:var(--sf);border:1px solid var(--ln)}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.nf{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(circle at 50% 0,#252830,var(--sf));font-family:var(--sr);font-size:38px;color:var(--gold);z-index:0}
+.th img{position:relative;z-index:1}
+.in2{min-width:0;display:flex;flex-direction:column}
+.nm{font-family:var(--sr);font-size:19px;line-height:1.15;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mt{font-size:12px;color:var(--mu);margin-top:3px}
+.bm{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px;gap:8px}
+.pr{font-family:var(--sr);font-size:20px;font-weight:600;white-space:nowrap}.pr small{font-family:-apple-system,system-ui,sans-serif;font-size:11px;color:var(--mu);font-weight:400}
+.ad{width:44px;height:44px;border:1px solid var(--gold);background:none;color:var(--gold);font-size:24px;font-weight:300;transition:.3s var(--ez);flex:none}
+.ad:active{background:var(--gold);color:#0b0c0e}
+.sp{display:flex;align-items:center;border:1px solid var(--gold);height:44px;flex:none}
+.sp button{width:38px;height:42px;background:none;border:0;color:var(--gold);font-size:22px;font-weight:300}
+.sp b{min-width:52px;text-align:center;font-size:13px;font-weight:600}
+.em{text-align:center;color:var(--mu);padding:40px 0;font-size:14px}
+#bar{position:fixed;left:12px;right:12px;bottom:calc(var(--nav) + var(--sb) + 10px);height:56px;background:var(--gold);color:#0b0c0e;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border:0;transform:translateY(160%);transition:transform .6s var(--ez);z-index:20;width:calc(100% - 24px);box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#bar.show{transform:none}#bar span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}#bar b{font-family:var(--sr);font-size:22px;font-weight:700}
+nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav) + var(--sb));padding-bottom:var(--sb);background:rgba(15,16,19,.96);backdrop-filter:blur(16px);border-top:1px solid var(--ln);display:grid;grid-template-columns:repeat(3,1fr);z-index:25}
+nav button{background:none;border:0;color:var(--mu);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;position:relative;transition:color .3s}
+nav button.on{color:var(--gold)}nav svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#bd{position:absolute;top:8px;left:calc(50% + 6px);min-width:18px;height:18px;border-radius:9px;background:var(--gold);color:#0b0c0e;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 5px;letter-spacing:0}#bd.s{display:flex;animation:bump .4s var(--ez)}
+@keyframes bump{50%{transform:scale(1.5)}}
+h2.t{font-family:var(--sr);font-weight:500;font-size:32px;margin:6px 0 4px}
+.pd{padding:0 18px}
+.fl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);margin:20px 0 8px}
+.sg{display:flex;flex-wrap:wrap;gap:8px}.sg button{height:42px;padding:0 16px;border:1px solid var(--ln);background:transparent;color:var(--mu);font-size:14px;transition:.3s var(--ez)}.sg button.on{border-color:var(--gold);color:var(--gold);background:rgba(201,169,110,.1)}
+.fi{width:100%;height:52px;background:transparent;border:0;border-bottom:1px solid var(--ln);color:var(--tx);font-size:16px;padding:0;outline:0;border-radius:0;margin-top:4px;font-family:inherit;transition:border-color .3s}.fi:focus{border-color:var(--gold)}textarea.fi{height:76px;padding-top:14px;resize:none}
+.fi.er{border-color:#c0503f;animation:sk .4s}@keyframes sk{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.cb{display:flex;align-items:center;gap:12px;margin-top:20px;font-size:14px;color:var(--tx)}.cb i{width:24px;height:24px;border:1px solid var(--gold);display:grid;place-items:center;flex:none;transition:.3s}.cb.on i{background:var(--gold)}.cb.on i:after{content:"";width:6px;height:11px;border:solid #0b0c0e;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.sm{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0 4px;border-top:1px solid var(--ln);margin-top:8px}.sm b{font-family:var(--sr);font-size:30px;font-weight:600}
+.nt{font-size:12px;color:var(--mu);line-height:1.5;margin:4px 0}
+.lk{display:flex;justify-content:space-between;align-items:center;min-height:64px;border-bottom:1px solid var(--ln);width:100%;background:none;border-left:0;border-right:0;border-top:0;text-decoration:none;color:var(--tx);font-size:16px;text-align:left;padding:0;transition:.3s var(--ez)}.lk span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-right:10px}.lk:active{padding-left:8px;color:var(--gold)}
+.lk div{display:flex;flex-direction:column;gap:3px}.lk div small{font-size:12px;color:var(--mu)}
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.72);opacity:0;pointer-events:none;transition:.4s;z-index:40}#ov.show{opacity:1;pointer-events:auto}
+#sh{position:fixed;left:0;right:0;bottom:0;max-height:90dvh;overflow:auto;background:var(--sf);border-top:1px solid var(--gold);padding:0 18px calc(24px + var(--sb));transform:translateY(105%);transition:transform .6s var(--ez);z-index:50}#sh.show{transform:none}
+.gr{width:40px;height:4px;background:var(--ln);margin:10px auto 16px}
+.ph{aspect-ratio:16/10;position:relative;overflow:hidden;border:1px solid var(--ln);background:var(--sf2)}.ph img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}.ph .nf{font-size:72px}
+.sh2{font-family:var(--sr);font-size:30px;font-weight:600;margin:16px 0 4px;line-height:1.1}
+.sp2{width:100%;border-collapse:collapse;margin:14px 0}.sp2 td{padding:11px 0;border-bottom:1px solid var(--ln);font-size:14px}.sp2 td:first-child{color:var(--mu);width:44%}
+.ok{text-align:center;padding:18px 0}.ok h2{font-family:var(--sr);font-weight:500;font-size:30px;margin:10px 0}
+.ln{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:dr 1.2s var(--ez) both}@keyframes dr{from{transform:scaleX(0)}}
+</style></head><body>
+<section class="view on" id="v-cat">
+ <div class="hd"><h1 class="wm">НИВА</h1><span class="lbl">Опт · рыба · икра</span></div>
+ <div class="qa"><button class="bt" id="qp">Получить прайс</button><button class="bt o" id="qc">Позвонить</button></div>
+ <div class="stk"><div class="sr"><svg viewBox="0 0 20 20"><circle cx="9" cy="9" r="6"/><path d="M14 14l4 4"/></svg><input id="q" placeholder="Поиск по каталогу" autocomplete="off"></div><div class="ch" id="ch"></div></div>
+ <div class="ls" id="ls"></div>
+</section>
+<section class="view" id="v-req"><div class="hd"><h1 class="wm" style="font-size:22px">ЗАЯВКА</h1></div><div class="pd" id="rq"></div></section>
+<section class="view" id="v-ct"><div class="hd"><h1 class="wm" style="font-size:22px">КОНТАКТЫ</h1></div><div class="pd" id="ctc"></div></section>
+<button id="bar"><span>Перейти к заявке</span><b id="bt"></b></button>
+<nav id="nv"><button data-v="cat" class="on"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7"/><rect x="13.5" y="3.5" width="7" height="7"/><rect x="3.5" y="13.5" width="7" height="7"/><rect x="13.5" y="13.5" width="7" height="7"/></svg>Каталог</button><button data-v="req"><svg viewBox="0 0 24 24"><path d="M8 4h8l1 2h3v15H4V6h3z"/><path d="M8 12h8M8 16h5"/></svg>Заявка<em id="bd"></em></button><button data-v="ct"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A15 15 0 013 6a2 2 0 012-2z"/></svg>Контакты</button></nav>
+<div id="ov"></div><section id="sh"></section>
+<script>
+// ===== НАСТРОЙКИ =====
+const C={phone:'+79315901488',email:'nivafishspb@mail.ru',wa:'79315901488',tg:'https://t.me/+79315901488'};
+const U=(id,w)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w||700}&q=70`;
+const IC=U('1728335026927-8ee0382ada94'),IS=U('1625229466790-62bae5ab4ff4');
+// ВСЕ ДАННЫЕ ПРИМЕРНЫЕ — замените на свои. p:null → «Цена по запросу». img: свой URL фото или null. s: характеристики для карточки.
+const PRODUCTS=[
+{id:1,cat:'Икра',n:'Икра красная лососевая',d:'Крупное целое зерно, классический посол.',p:5200,u:'кг',st:1,min:5,img:IC,s:[['Вид','Красная лососевая'],['Посол','Классический']]},
+{id:2,cat:'Икра',n:'Икра горбуши',d:'Мягкий посол, ястычная.',p:4600,u:'кг',st:1,min:5,img:IC,s:[['Вид','Горбуша'],['Посол','Мягкий']]},
+{id:3,cat:'Икра',n:'Икра осетровая',d:'Премиальный сегмент. Цену и наличие уточняйте у менеджера.',p:null,u:'кг',st:.5,min:1,img:null,s:[['Вид','Осетровая']]},
+{id:4,cat:'Красная рыба',n:'Сёмга охлаждённая',d:'Тушка 4–5 кг, потрошёная.',p:1190,u:'кг',st:5,min:10,img:IS,s:[['Форма','Охлаждённая'],['Размер','Тушка 4–5 кг']]},
+{id:5,cat:'Красная рыба',n:'Форель слабосолёная',d:'Филе-кусок, вакуумная упаковка.',p:1450,u:'кг',st:2,min:6,img:IS,s:[['Форма','Слабосолёная'],['Упаковка','Вакуум']]},
+{id:6,cat:'Красная рыба',n:'Кета свежемороженая',d:'Потрошёная, без головы.',p:640,u:'кг',st:5,min:10,img:null,s:[['Форма','Свежемороженая']]},
+{id:7,cat:'Белая рыба',n:'Осётр охлаждённый',d:'Тушка, потрошёная.',p:2400,u:'кг',st:2,min:6,img:null,s:[['Форма','Охлаждённая']]},
+{id:8,cat:'Белая рыба',n:'Судак, филе',d:'Без кожи и костей.',p:780,u:'кг',st:5,min:10,img:null,s:[['Форма','Филе']]},
+{id:9,cat:'Морепродукты',n:'Креветки 50/70',d:'Варёно-мороженые.',p:890,u:'кг',st:5,min:10,img:null,s:[['Калибр','50/70'],['Форма','Варёно-мороженые']]},
+{id:10,cat:'Морепродукты',n:'Мидии в раковине',d:'Варёно-мороженые.',p:520,u:'кг',st:5,min:10,img:null,s:[['Форма','Варёно-мороженые']]}];
+const tg=window.Telegram&&Telegram.WebApp,hap=t=>{try{tg.HapticFeedback.impactOccurred(t||'light')}catch(e){}};
+if(tg){try{tg.ready();tg.expand();tg.setHeaderColor('#0b0c0e');tg.setBackgroundColor('#0b0c0e');tg.disableVerticalSwipes&&tg.disableVerticalSwipes()}catch(e){}}
+let cart={},cat='Все',qs='',view='cat',F={nm:'',ph:'',cp:'',ci:'',cm:'',type:'Ресторан',fq:'Разово',sm:false};
+try{cart=JSON.parse(localStorage.getItem('nivaCart')||'{}')}catch(e){}
+const $=i=>document.getElementById(i),P=i=>PRODUCTS.find(x=>x.id==i),R=n=>Math.round(n).toLocaleString('ru-RU')+' ₽',save=()=>{try{localStorage.setItem('nivaCart',JSON.stringify(cart))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sub=()=>Object.entries(cart).reduce((s,[i,q])=>s+(P(i).p||0)*q,0),cnt=()=>Object.keys(cart).length,kg=()=>Object.entries(cart).reduce((s,[i,q])=>s+(P(i).u=='кг'?q:0),0),hasReq=()=>Object.keys(cart).some(i=>!P(i).p);
+const total=()=>cnt()?(sub()?R(sub())+(hasReq()?' +':''):'По запросу'):'';
+const CATS=['Все',...new Set(PRODUCTS.map(p=>p.cat))];
+function thumb(p,big){return `<div class="${big?'ph':'th'}"><div class="nf">${p.n[0]}</div>${p.img?`<img src="${p.img}" alt="" loading="lazy" onerror="this.remove()">`:''}</div>`}
+function ctl(p){const q=cart[p.id];return q?`<div class="sp"><button data-m="${p.id}" aria-label="Меньше">−</button><b>${q} ${p.u}</b><button data-a="${p.id}" aria-label="Больше">+</button></div>`:`<button class="ad" data-a="${p.id}" aria-label="Добавить">+</button>`}
+function drawCh(){$('ch').innerHTML=CATS.map(c=>`<button class="cp ${c==cat?'on':''}" data-c="${c}">${c}</button>`).join('')}
+function drawList(){const l=PRODUCTS.filter(p=>(cat=='Все'||p.cat==cat)&&(p.n+' '+p.d).toLowerCase().includes(qs));$('ls').innerHTML=l.length?l.map((p,i)=>`<article class="rw" data-o="${p.id}" style="animation-delay:${i*45}ms">${thumb(p)}<div class="in2"><div class="nm">${p.n}</div><div class="mt">от ${p.min} ${p.u}</div><div class="bm"><div class="pr">${p.p?R(p.p)+'<small> / '+p.u+'</small>':'<small>Цена по запросу</small>'}</div><div class="ctl">${ctl(p)}</div></div></div></article>`).join(''):'<div class="em">Ничего не найдено</div>'}
+function upd(){const n=cnt(),b=$('bd');b.textContent=n;b.classList.toggle('s',n>0);if(n){b.classList.remove('s');void b.offsetWidth;b.classList.add('s')}
+$('bar').classList.toggle('show',n>0&&view=='cat');$('bt').textContent=total()}
+function show(v){view=v;document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id=='v-'+v));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v==v));if(v=='req')drawReq();window.scrollTo(0,0);upd();hap('soft')}
+function chg(id,d){const p=P(id),q=cart[id]||0;let n=q+d*p.st;if(d>0&&!q)n=p.min;if(d<0&&n<p.min)n=0;if(n>0)cart[id]=Math.round(n*10)/10;else delete cart[id];save();hap();document.querySelectorAll('[data-o="'+id+'"] .ctl').forEach(c=>c.innerHTML=ctl(p));upd();if(view=='req')drawReq();if($('sh').classList.contains('show')&&sheetId==id)drawDetail(id)}
+function keep(){['nm','ph','cp','ci','cm'].forEach(k=>{const e=$(k);if(e)F[k]=e.value})}
+function seg(k,arr){return `<div class="sg">${arr.map(a=>`<button data-f="${k}" data-v="${a}" class="${F[k]==a?'on':''}">${a}</button>`).join('')}</div>`}
+function drawReq(){keep();const n=cnt();$('rq').innerHTML=n?`${Object.entries(cart).map(([i,q])=>{const p=P(i);return`<div class="rw" style="grid-template-columns:1fr auto;animation:none;align-items:center"><div class="in2"><div class="nm">${p.n}</div><div class="mt">${p.p?R(p.p*q):'Цена по запросу'}</div></div><div class="sp"><button data-m="${i}">−</button><b>${q} ${p.u}</b><button data-a="${i}">+</button></div></div>`}).join('')}
+<div class="sm"><span class="lbl">Ориентировочно</span><b>${total()}</b></div><p class="nt">Окончательную стоимость и условия поставки согласует менеджер.</p>
+<div class="fl">Вы</div>${seg('type',['Ресторан','Магазин','Дистрибьютор','Другое'])}
+<div class="fl">Поставка</div>${seg('fq',['Разово','Регулярно'])}
+<div class="fl">Контакты</div><input class="fi" id="nm" placeholder="Имя" value="${esc(F.nm)}" autocomplete="name"><input class="fi" id="cp" placeholder="Компания" value="${esc(F.cp)}"><input class="fi" id="ph" type="tel" placeholder="Телефон" value="${esc(F.ph)}" autocomplete="tel"><input class="fi" id="ci" placeholder="Город доставки" value="${esc(F.ci)}"><textarea class="fi" id="cm" placeholder="Комментарий">${esc(F.cm)}</textarea>
+<div class="cb ${F.sm?'on':''}" id="smp"><i></i>Нужны образцы продукции</div><button class="bt" id="snd" style="width:100%;margin-top:26px;height:54px">Отправить заявку</button>`:`<div class="em" style="padding-top:60px"><div class="ln" style="width:60px;margin:0 auto 22px"></div>Заявка пока пуста.<br>Добавьте позиции из каталога<br>или запросите актуальный прайс.</div><button class="bt" id="g1" style="width:100%;margin-top:10px">В каталог</button><button class="bt o" id="g2" style="width:100%;margin-top:10px">Получить прайс</button>`;
+if(n){$('snd').onclick=()=>{keep();if(!valid())return;choose('order')};$('smp').onclick=()=>{keep();F.sm=!F.sm;$('smp').classList.toggle('on',F.sm)}}else{$('g1').onclick=()=>show('cat');$('g2').onclick=()=>choose('price')}}
+function valid(){let bad=0;[['nm',2],['ph',6]].forEach(([k,n])=>{const e=$(k);if(F[k].trim().length<n){e.classList.remove('er');void e.offsetWidth;e.classList.add('er');bad=1}});if(bad){try{tg.HapticFeedback.notificationOccurred('error')}catch(e){}const e=document.querySelector('.er');e&&e.scrollIntoView({block:'center',behavior:'smooth'})}return!bad}
+function msg(kind){if(kind=='price')return 'Здравствуйте! Прошу прислать актуальный прайс-лист на оптовые поставки рыбы и икры.'+(F.nm?'\nИмя: '+F.nm:'')+(F.ph?'\nТелефон: '+F.ph:'');
+const l=Object.entries(cart).map(([i,q])=>`— ${P(i).n}: ${q} ${P(i).u}`);return `Заявка ООО «Нива»\n${l.join('\n')}\n${sub()?'Ориентировочно: '+total()+'\n':''}Тип клиента: ${F.type}\nПоставка: ${F.fq}\nГород: ${F.ci||'—'}\nОбразцы: ${F.sm?'да':'нет'}\nИмя: ${F.nm}\nКомпания: ${F.cp||'—'}\nТелефон: ${F.ph}\nКомментарий: ${F.cm||'—'}`}
+function go(u){if(/^https:\/\/t\.me/.test(u)&&tg)tg.openTelegramLink(u);else if(/^https?:/.test(u)){tg?tg.openLink(u):window.open(u,'_blank')}else location.href=u}
+let sheetId=0;
+function openSh(h){$('sh').innerHTML='<div class="gr"></div>'+h;$('ov').classList.add('show');$('sh').classList.add('show');$('sh').scrollTop=0;try{tg.BackButton.show();tg.BackButton.onClick(closeSh)}catch(e){}}
+function closeSh(){$('ov').classList.remove('show');$('sh').classList.remove('show');sheetId=0;try{tg.BackButton.hide();tg.BackButton.offClick(closeSh)}catch(e){}}
+function drawDetail(id){const p=P(id);$('sh').innerHTML='<div class="gr"></div>'+`${thumb(p,1)}<div class="sh2">${p.n}</div><p class="nt" style="font-size:14px">${p.d}</p><table class="sp2">${[...p.s,['Минимальный заказ',p.min+' '+p.u],['Шаг заказа',p.st+' '+p.u],['Цена',p.p?'от '+R(p.p)+' / '+p.u:'По запросу']].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table><div data-o="${id}" style="display:flex;justify-content:flex-end;margin-bottom:${cart[id]?0:-16}px;${cart[id]?'':'height:0;overflow:hidden'}"><div class="ctl">${ctl(p)}</div></div><button class="bt" id="dc" style="width:100%;margin-top:16px">${cart[id]?'Готово':'В заявку'}</button>`;$('dc').onclick=()=>{if(!cart[id])chg(id,1);closeSh()}}
+function openDetail(id){sheetId=id;drawDetail(id);$('ov').classList.add('show');$('sh').classList.add('show');$('sh').scrollTop=0;try{tg.BackButton.show();tg.BackButton.onClick(closeSh)}catch(e){}}
+function choose(kind){openSh(`<span class="lbl">Отправка</span><h2 class="t">Куда отправить?</h2><p class="nt" style="margin-bottom:8px">${kind=='price'?'Запрос прайс-листа':'Заявка'} поступит напрямую менеджеру.</p>${[['WhatsApp',C.phone,'wa'],['Telegram',C.phone,'tg'],['Почта',C.email,'em']].map(x=>`<button class="lk" data-s="${x[2]}" data-k="${kind}"><div>${x[0]}<small>${x[1]}</small></div><span>→</span></button>`).join('')}`)}
+function send(k,kind){const t=msg(kind);try{tg.HapticFeedback.notificationOccurred('success')}catch(e){}
+if(k=='wa')go('https://wa.me/'+C.wa+'?text='+encodeURIComponent(t));else if(k=='em')go('mailto:'+C.email+'?subject='+encodeURIComponent(kind=='price'?'Запрос прайс-листа':'Заявка с мини-приложения НИВА')+'&body='+encodeURIComponent(t));else{try{navigator.clipboard.writeText(t)}catch(e){}go(C.tg)}
+$('sh').innerHTML=`<div class="gr"></div><div class="ok"><div class="ln" style="width:60px;margin:6px auto"></div><span class="lbl">Готово</span><h2>${k=='tg'?'Текст скопирован':'Всё готово'}</h2><p class="nt">${k=='tg'?'Вставьте его в открывшийся чат с менеджером.':'Отправьте сообщение в открывшемся окне — менеджер свяжется с вами.'}</p><button class="bt" id="cl" style="width:100%;margin-top:18px">Закрыть</button></div>`;$('cl').onclick=()=>{closeSh();if(kind=='order'){cart={};save();drawList();upd();drawReq()}}}
+$('ctc').innerHTML=`<p class="nt" style="font-size:14px;margin-bottom:10px">Условия поставки — объём, периодичность, доставка — согласуем индивидуально.</p>${[['Телефон',C.phone,'tel:'+C.phone,'Звонок'],['WhatsApp',C.phone,'https://wa.me/'+C.wa,'Написать'],['Telegram',C.phone,C.tg,'Написать'],['Почта',C.email,'mailto:'+C.email,'Письмо']].map(x=>`<a class="lk" data-h="${x[2]}" href="${x[2]}"><div>${x[0]}<small>${x[1]}</small></div><span>${x[3]}</span></a>`).join('')}`;
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a],[data-m],[data-c],[data-v],[data-h],[data-f],[data-s],[data-o]');if(!t)return;
+if(t.dataset.a){e.stopPropagation();chg(+t.dataset.a,1)}else if(t.dataset.m){e.stopPropagation();chg(+t.dataset.m,-1)}
+else if(t.dataset.h){e.preventDefault();go(t.dataset.h)}else if(t.dataset.s)send(t.dataset.s,t.dataset.k)
+else if(t.dataset.f){keep();F[t.dataset.f]=t.dataset.v;t.parentNode.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b==t));hap('soft')}
+else if(t.dataset.c){cat=t.dataset.c;hap('soft');drawCh();drawList()}else if(t.dataset.v&&t.closest('nav'))show(t.dataset.v)
+else if(t.dataset.o&&t.classList.contains('rw'))openDetail(+t.dataset.o)});
+let tm;$('q').oninput=e=>{clearTimeout(tm);tm=setTimeout(()=>{qs=e.target.value.toLowerCase().trim();drawList()},150)};
+$('qp').onclick=()=>choose('price');$('qc').onclick=()=>go('tel:'+C.phone);$('bar').onclick=()=>show('req');$('ov').onclick=closeSh;
+drawCh();drawList();upd();
+</script></body></html>
